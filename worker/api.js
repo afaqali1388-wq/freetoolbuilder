@@ -46,7 +46,7 @@ export async function onRequest({request:req,env,params}){
  if(path==="logout"&&m==="POST"){const t=(req.headers.get("authorization")||"").replace(/^Bearer\s+/i,"");await db.prepare("DELETE FROM sessions WHERE token=?").bind(t).run();return J({ok:true});}
  if(path==="ev"&&m==="POST"){await setup2(db);const k=S(body.k,8);if(KINDS.indexOf(k)<0)return J({error:"Bad kind"},400);
   const now=Date.now(),sid=S(body.sid,24),vid=S(body.vid,24),tool=S(body.tool,40),cc=S(req.cf&&req.cf.country||req.headers.get("cf-ipcountry"),4);if(!/^[a-z0-9]{8,24}$/.test(sid))return J({error:"Bad id"},400);
-  const u=req.headers.get("authorization")?await me(db,req):null,uid=u?u.id:null;
+  const u=req.headers.get("authorization")?await me(db,req):null,uid=u?u.id:null;if(isOwner(u))return J({ok:true,skipped:true});
   await db.prepare("INSERT INTO pres(sid,t,uid,tool,page,country) VALUES(?,?,?,?,?,?) ON CONFLICT(sid) DO UPDATE SET t=excluded.t,uid=excluded.uid,tool=excluded.tool,page=excluded.page,country=excluded.country").bind(sid,now,uid,tool,S(body.page,40),cc).run();
   if(k!=="ping")await db.prepare("INSERT INTO ev(t,vid,sid,uid,k,tool,n,msg,country,ref) VALUES(?,?,?,?,?,?,?,?,?,?)").bind(now,vid,sid,uid,k,tool,Math.max(0,Math.min(36e5,parseInt(body.n,10)||0)),S(body.msg,160),cc,S(body.ref,80)).run();
   if(Math.random()<0.01)await db.batch([db.prepare("DELETE FROM ev WHERE t<?").bind(now-120*864e5),db.prepare("DELETE FROM pres WHERE t<?").bind(now-864e5)]);
