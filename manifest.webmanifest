@@ -1,0 +1,28 @@
+{
+ "name": "FreeToolBuilder - free everyday and business tools",
+ "short_name": "FreeToolBuilder",
+ "description": "Free tools for money, dates, WhatsApp, QR codes and more. Works offline.",
+ "start_url": "./",
+ "scope": "./",
+ "display": "standalone",
+ "background_color": "#F5F9FF",
+ "theme_color": "#0B6BF2",
+ "icons": [
+  {
+   "src": "icon-192.png",
+   "sizes": "192x192",
+   "type": "image/png"
+  },
+  {
+   "src": "icon-512.png",
+   "sizes": "512x512",
+   "type": "image/png"
+  },
+  {
+   "src": "icon-maskable-512.png",
+   "sizes": "512x512",
+   "type": "image/png",
+   "purpose": "maskable"
+  }
+ ]
+}
