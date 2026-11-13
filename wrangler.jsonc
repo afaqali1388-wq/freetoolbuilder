@@ -2,7 +2,6 @@
   "name": "freetoolbuilder",
   "main": "worker/index.js",
   "compatibility_date": "2026-11-01",
-  "assets": { "directory": "./public", "binding": "ASSETS", "not_found_handling": "404-page"}
-  /* DATABASE: after you create the D1 database, Claude adds it here:
-  ,"d1_databases": [{ "binding": "DB", "database_name": "ftb", "database_id": "PASTE-ID" }] */
+  "assets": { "directory": "./public", "binding": "ASSETS", "not_found_handling": "404-page" },
+  "d1_databases": [{ "binding": "DB", "database_name": "ftb", "database_id": "e7bef3bf-4c10-4704-83a6-a9e35efa03bb" }]
 }
